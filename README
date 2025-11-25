@@ -1,28 +1,131 @@
-# MiniUTXO-Blockchain
 
-🔥 A lightweight and modular Python implementation of a mini UTXO-based blockchain and virtual wallet system.
+# 🟣 MiniUTXO-Blockchain
+*A modular and lightweight Python implementation of a mini UTXO-based blockchain.*
 
-## 📌 Overview
-This project demonstrates the core mechanics behind blockchain-based digital currency.
-It implements a minimal UTXO ledger, allowing secure value transfers using signed transactions,
-public-key verification, and block-based confirmation.
+---
 
-## 🧠 What It Includes
-- Secure digital signatures (private/public keys)
-- Signed transactions with validation
-- Block creation and confirmation
-- A minimal blockchain ledger
-- Wallets that track and update UTXO balances
-- Clean, modular architecture for easy extension
+## 🚀 Overview
+This project implements a **miniature blockchain engine** focused on the UTXO (Unspent Transaction Output) model — the same conceptual foundation used by Bitcoin.
+It includes digital signature flows, UTXO selection, block creation, verification logic, and a clean separation between Wallet, Transaction, Block, and Bank (Ledger).
 
-## 🏗 Project Structure
-- **bank.py** – Manages the blockchain and validates transactions
-- **block.py** – Represents a block of confirmed transactions
-- **transaction.py** – Creates & verifies signed transfers
-- **wallet.py** – Generates keys, signs transactions, tracks UTXOs
-- **utils.py** – Cryptographic helper functions
+The goal of the project is to demonstrate how value moves securely in a blockchain system, how ownership is proven, and how transactions are validated using cryptography.
 
-## 🎯 Purpose
-A compact, easy-to-read blockchain engine designed to illustrate how cryptocurrency systems
-(such as Bitcoin’s UTXO model) work under the hood — without unnecessary complexity.
+---
 
+## 🧠 Architecture
+Below is the core structure of the project:
+
+```
+MiniUTXO-Blockchain/
+│
+├── ex1/
+│   ├── bank.py         # Maintains UTXO ledger and block history
+│   ├── block.py        # Represents a block containing transactions
+│   ├── transaction.py  # Defines transaction structure + signatures
+│   ├── wallet.py       # Generates keys, manages balance, creates signed transactions
+│   ├── utils.py        # Crypto helpers (hashing, signing, verifying)
+│   └── __init__.py     # Clean module export
+│
+├── tests/              # Organized test suite
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 🔐 Cryptographic Flow
+Here's how a value transfer works in this mini-blockchain:
+
+1. **Wallet creates a key pair** (private/public).
+2. A **transaction is constructed** referencing a previous UTXO.
+3. The transaction is **digitally signed** using the sender’s private key.
+4. The Bank verifies:
+   - Signature authenticity
+   - Ownership of the referenced UTXO
+   - UTXO not yet spent
+5. If valid — the transaction is added to the next block.
+6. UTXO set is updated:
+   - Old UTXO consumed
+   - New UTXO created for the receiver
+
+This mirrors the fundamental system used in real cryptocurrencies.
+
+---
+
+## 📦 Features Included
+
+### 🔹 Core Blockchain Logic
+- UTXO-based transaction model
+- Signature validation using public keys
+- Prevention of double-spending
+- Block structure and confirmation flow
+- Simple append-only ledger simulation
+
+### 🔹 Wallet Functionality
+- Keypair generation
+- Balance tracking using UTXO scan
+- Secure transaction creation
+- Automatic selection of spendable UTXOs
+
+### 🔹 Clean & Modular Code
+The project follows a separation-of-concerns design, allowing each component to remain testable and easy to extend.
+
+---
+
+## 📘 Example: Creating a Transaction
+
+```python
+from ex1.wallet import Wallet
+from ex1.bank import Bank
+
+# Initialize bank & wallets
+bank = Bank()
+alice = Wallet()
+bob = Wallet()
+
+# Bank gives Alice an initial coin
+bank.genesis(alice.public_key)
+
+# Alice creates a signed transaction to Bob
+tx = alice.create_transaction(bob.public_key)
+
+# Bank processes the transaction and adds it to a block
+bank.add_block([tx])
+```
+
+---
+
+## 🧪 Testing
+A dedicated `tests/` directory is included, containing:
+
+- Public ledger tests
+- UTXO flow tests
+- Signature security tests
+
+All tests rely on Python's `pytest` framework.
+
+---
+
+## 📝 Requirements
+Install dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## ⭐ Future Improvements
+Planned upgrades that could extend the project:
+
+- Merkle tree support
+- Proof-of-Work mock engine
+- Multi-input transactions
+- API interface for submitting transactions
+- Persistent storage of blocks
+
+---
+
+## 👨‍💻 Author
+**Nave Toren**
+A computer science student with hands-on blockchain, cryptography, and secure programming experience.
