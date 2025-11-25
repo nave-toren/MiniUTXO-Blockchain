@@ -1,0 +1,12 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# PyCharm project files
+.idea/
+
+# Zip files
+*.zip
