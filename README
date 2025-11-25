@@ -1,0 +1,28 @@
+# MiniUTXO-Blockchain
+
+🔥 A lightweight and modular Python implementation of a mini UTXO-based blockchain and virtual wallet system.
+
+## 📌 Overview
+This project demonstrates the core mechanics behind blockchain-based digital currency.
+It implements a minimal UTXO ledger, allowing secure value transfers using signed transactions,
+public-key verification, and block-based confirmation.
+
+## 🧠 What It Includes
+- Secure digital signatures (private/public keys)
+- Signed transactions with validation
+- Block creation and confirmation
+- A minimal blockchain ledger
+- Wallets that track and update UTXO balances
+- Clean, modular architecture for easy extension
+
+## 🏗 Project Structure
+- **bank.py** – Manages the blockchain and validates transactions
+- **block.py** – Represents a block of confirmed transactions
+- **transaction.py** – Creates & verifies signed transfers
+- **wallet.py** – Generates keys, signs transactions, tracks UTXOs
+- **utils.py** – Cryptographic helper functions
+
+## 🎯 Purpose
+A compact, easy-to-read blockchain engine designed to illustrate how cryptocurrency systems
+(such as Bitcoin’s UTXO model) work under the hood — without unnecessary complexity.
+
