@@ -28,7 +28,7 @@ class Wallet:
             block = bank.blockchain[i]
             for tx in block.transactions:
                 if tx.output == self.public_key: ##got new coin
-                    self.my_outputs=[tx.get_txid()]
+                    self.my_outputs.append(tx.get_txid())
                     self.balance += 1
 
                 if tx.input in self.my_outputs: ##my coin accepted
